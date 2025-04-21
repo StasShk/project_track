@@ -1,4 +1,63 @@
-GET http://127.0.0.1:8000/hello/User
+GET http://127.0.0.1:5000/hello/User
 Accept: application/json
 
-###
+
+### Create project
+POST http://localhost:5000/projects/
+Content-Type: application/json
+
+{
+  "code": "MY_PROJECT",
+  "archived": false,
+  "start_date": "2024-01-01",
+  "end_date": "2024-12-31"
+}
+
+### Get all projects
+GET http://localhost:5000/projects/
+Accept: application/json
+
+### Create software version (valid)
+POST http://localhost:5000/software_versions/
+Content-Type: application/json
+
+{
+  "name": "Maya",
+  "version": "2024.1",
+  "vendor": "Autodesk",
+  "deprecated": false
+}
+
+### Create software version (deprecated)
+POST http://localhost:5000/software_versions/
+Content-Type: application/json
+
+{
+  "name": "Maya",
+  "version": "2020",
+  "vendor": "Autodesk",
+  "deprecated": true
+}
+
+### Get all software versions
+GET http://localhost:5000/software_versions/
+Accept: application/json
+
+### Associate valid software to project
+POST http://localhost:5000/associate/
+Content-Type: application/json
+
+{
+  "project_id": 1,
+  "software_id": 1
+}
+
+### Associate deprecated software to project (should fail)
+POST http://localhost:5000/associate/
+Content-Type: application/json
+
+{
+  "project_id": 1,
+  "software_id": 2
+}
+
