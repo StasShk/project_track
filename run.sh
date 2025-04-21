@@ -9,6 +9,7 @@ docker build -t $IMAGE_NAME .
 
 docker run -d \
    -p 5000:5000 \
+   --env-file .env \
    --name $CONTAINER_NAME \
     --mount type=bind,source="$(pwd)/exercise.db",target=/app/exercise.db \
    $IMAGE_NAME
