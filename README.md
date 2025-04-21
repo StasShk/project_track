@@ -71,7 +71,7 @@ curl http://localhost:5000/projects/1
 
 Create a valid software version.
 ```bash
-curl -X POST http://localhost:8000/software_versions/ \
+curl -X POST http://localhost:5000/software_versions/ \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Maya",
@@ -86,7 +86,7 @@ curl -X POST http://localhost:8000/software_versions/ \
 
 Get software version by ID.
 ```bash
-curl http://localhost:8000/software_versions/1
+curl http://localhost:5000/software_versions/1
 ```
 
 
@@ -95,7 +95,7 @@ curl http://localhost:8000/software_versions/1
 
 Associate a valid software version to a project.
 ```bash
-curl -X POST http://localhost:8000/associate/ \
+curl -X POST http://localhost:5000/associate/ \
   -H "Content-Type: application/json" \
   -d '{
     "project_id": 1,
