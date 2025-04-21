@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
@@ -34,8 +34,13 @@ def create_project(project: schemas.ProjectCreate, db: Session = Depends(get_db)
 
 
 @app.get("/projects/", response_model=List[schemas.ProjectRead])
-def list_projects(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
-    return crud.get_projects(db, skip, limit)
+def list_projects(
+    skip: int = 0,
+    limit: int = 10,
+    start_date: Optional[str] = None,
+    db: Session = Depends(get_db)
+):
+    return crud.get_projects(db, skip=skip, limit=limit, start_date=start_date)
 
 
 @app.get("/projects/{project_id}", response_model=schemas.ProjectRead)
