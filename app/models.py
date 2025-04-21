@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, TEXT, Boolean, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import relationship
-from db import Base
+from .db import Base
 
 
 class Project(Base):
@@ -12,11 +12,11 @@ class Project(Base):
     start_date = Column(TEXT)
     end_date = Column(TEXT)
 
-    software_versions = relationship("ProjectSoftwareAssociation", back_populates="project")
+    software = relationship("ProjectSoftwareAssociation", back_populates="project")
 
 
 class SoftwareVersion(Base):
-    __tablename__ = "software_versions"
+    __tablename__ = "software"
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(TEXT, nullable=False)
@@ -37,5 +37,5 @@ class ProjectSoftwareAssociation(Base):
     project_id = Column(Integer, ForeignKey("projects.id"))
     software_id = Column(Integer, ForeignKey("software.id"))
 
-    project = relationship("Project", back_populates="software_versions")
+    project = relationship("Project", back_populates="software")
     software = relationship("SoftwareVersion", back_populates="projects")
